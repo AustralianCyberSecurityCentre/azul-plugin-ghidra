@@ -1,0 +1,4 @@
+libmagic-dev
+openjdk-21-jdk
+unzip
+wget
