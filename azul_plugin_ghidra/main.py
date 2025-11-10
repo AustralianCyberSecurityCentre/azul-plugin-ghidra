@@ -18,6 +18,10 @@ from azul_runner import (
     cmdline_run,
 )
 
+# Using tempfile.template as this ensures leftover folders get cleaned up by azul runner
+# Files can be left over if a timeout occurs.
+GHIDRA_PREFIX = f"{tempfile.template}ghidra_"
+
 
 def find_directory(name, extra_paths=None):
     """Return full path to requested directory."""
@@ -154,7 +158,7 @@ class AzulPluginGhidra(BinaryPlugin):
         """Run the plugin."""
         binary = job.get_data().get_filepath()
 
-        with tempfile.TemporaryDirectory(prefix=str(job.id)) as temp_dir:
+        with tempfile.TemporaryDirectory(prefix=GHIDRA_PREFIX + str(job.id), delete=True) as temp_dir:
             # Setting name of project here so that the project is correctly cleaned up after running
             proj_name = os.path.basename(temp_dir)
             output_path_decompilation = str(os.path.join(temp_dir, "GhidraDecompilation"))
