@@ -3,6 +3,7 @@
 import hashlib
 import os
 import re
+import shutil
 import tempfile
 
 import pyghidra
@@ -51,6 +52,8 @@ class AzulPluginGhidra(BinaryPlugin):
         filter_max_content_size="10MiB",
         max_values_per_feature="3000",  # Generally enough, however there are some binaries that exceed this
         min_length_structure=(int, 100),  # Increasing this value will remove smaller functions from output
+        # ghidra config that needs to be removed between runs to prevent build up  of logs
+        ghidra_config_path=(str, "~/.config/ghidra"),
     )
     FEATURES = [
         Feature(
@@ -156,6 +159,7 @@ class AzulPluginGhidra(BinaryPlugin):
 
     def execute(self, job: Job):
         """Run the plugin."""
+        shutil.rmtree(self.cfg.ghidra_config_path, ignore_errors=True)
         binary = job.get_data().get_filepath()
 
         with tempfile.TemporaryDirectory(prefix=GHIDRA_PREFIX + str(job.id), delete=True) as temp_dir:
