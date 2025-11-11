@@ -2,8 +2,11 @@
 
 import hashlib
 import os
+import pathlib
 import re
+import shutil
 import tempfile
+import traceback
 
 import pyghidra
 from azul_runner import (
@@ -51,6 +54,8 @@ class AzulPluginGhidra(BinaryPlugin):
         filter_max_content_size="10MiB",
         max_values_per_feature="3000",  # Generally enough, however there are some binaries that exceed this
         min_length_structure=(int, 100),  # Increasing this value will remove smaller functions from output
+        # ghidra config that needs to be removed between runs to prevent build up  of logs
+        ghidra_config_path=(str, f"{os.path.expanduser("~")}/.config/ghidra"),
     )
     FEATURES = [
         Feature(
@@ -123,7 +128,7 @@ class AzulPluginGhidra(BinaryPlugin):
                 try:
                     decomp_interface.openProgram(program)
                 except Exception as e:
-                    self.logger.warning(f"ERROR occured while trying to open the binary in Ghidra: {e}")
+                    self.logger.warning(f"ERROR occurred while trying to open the binary in Ghidra: {e}")
                     return False
 
                 # Get recognised functions
@@ -154,6 +159,18 @@ class AzulPluginGhidra(BinaryPlugin):
             if decomp_interface:
                 decomp_interface.closeProgram()
 
+    def cleanup_tempfiles(self):
+        """Cleanup temporary files left behind by ghidra."""
+        shutil.rmtree(self.cfg.ghidra_config_path, ignore_errors=True)
+        try:
+            temp_dir = pathlib.Path(tempfile.gettempdir())
+            for file in temp_dir.iterdir():
+                # Delete all old temp files created by ghidra
+                if file.is_dir() and file.name.lower().startswith(GHIDRA_PREFIX.lower()):
+                    shutil.rmtree(str(file.absolute()), ignore_errors=True)
+        except Exception:
+            self.logger.warning(f"unable to cleanup temp directory with error {traceback.format_exc()}")
+
     def execute(self, job: Job):
         """Run the plugin."""
         binary = job.get_data().get_filepath()
@@ -183,6 +200,8 @@ class AzulPluginGhidra(BinaryPlugin):
 
             with open(output_path_decompilation, "rb") as output_file:
                 self.add_data_file(DataLabel.DECOMPILED_C, {}, output_file)
+
+        self.cleanup_tempfiles()
 
 
 def main():
