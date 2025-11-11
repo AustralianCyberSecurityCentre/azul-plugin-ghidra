@@ -167,7 +167,7 @@ class AzulPluginGhidra(BinaryPlugin):
             for file in temp_dir.iterdir():
                 # Delete all old temp files created by ghidra
                 if file.is_file() and file.name.lower().startswith(GHIDRA_PREFIX.lower()):
-                    file.unlink(missing_ok=True)
+                    shutil.rmtree(str(file.absolute()), ignore_errors=True)
         except Exception:
             self.logger.warning(f"unable to cleanup temp directory with error {traceback.format_exc()}")
 
