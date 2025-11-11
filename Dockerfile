@@ -41,7 +41,6 @@ RUN if [ "$GIT_BRANCH_NAME" = "refs/heads/dev" ] ; then \
 # re-run install sdist to get correct version of current package after dev install.
 RUN if [ "$GIT_BRANCH_NAME" = "refs/heads/dev" ] ; then \
     pip install --find-links /tmp/ azul-plugin-ghidra==$(cd /tmp/src && python -m setuptools_scm);fi
-RUN playwright install
 
 
 FROM $REGISTRY/$BASE_IMAGE:$BASE_TAG AS base
