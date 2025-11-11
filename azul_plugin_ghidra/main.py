@@ -2,9 +2,11 @@
 
 import hashlib
 import os
+import pathlib
 import re
 import shutil
 import tempfile
+import traceback
 
 import pyghidra
 from azul_runner import (
@@ -157,9 +159,20 @@ class AzulPluginGhidra(BinaryPlugin):
             if decomp_interface:
                 decomp_interface.closeProgram()
 
+    def cleanup_tempfiles(self):
+        """Cleanup temporary files left behind by ghidra."""
+        shutil.rmtree(self.cfg.ghidra_config_path, ignore_errors=True)
+        try:
+            temp_dir = pathlib.Path(tempfile.gettempdir())
+            for file in temp_dir.iterdir():
+                # Delete all old temp files created by ghidra
+                if file.is_file() and file.name.lower().startswith(GHIDRA_PREFIX.lower()):
+                    file.unlink(missing_ok=True)
+        except Exception:
+            self.logger.warning(f"unable to cleanup temp directory with error {traceback.format_exc()}")
+
     def execute(self, job: Job):
         """Run the plugin."""
-        shutil.rmtree(self.cfg.ghidra_config_path, ignore_errors=True)
         binary = job.get_data().get_filepath()
 
         with tempfile.TemporaryDirectory(prefix=GHIDRA_PREFIX + str(job.id), delete=True) as temp_dir:
@@ -187,6 +200,8 @@ class AzulPluginGhidra(BinaryPlugin):
 
             with open(output_path_decompilation, "rb") as output_file:
                 self.add_data_file(DataLabel.DECOMPILED_C, {}, output_file)
+
+        self.cleanup_tempfiles()
 
 
 def main():
