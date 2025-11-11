@@ -126,7 +126,7 @@ class AzulPluginGhidra(BinaryPlugin):
                 try:
                     decomp_interface.openProgram(program)
                 except Exception as e:
-                    self.logger.warning(f"ERROR occured while trying to open the binary in Ghidra: {e}")
+                    self.logger.warning(f"ERROR occurred while trying to open the binary in Ghidra: {e}")
                     return False
 
                 # Get recognised functions
