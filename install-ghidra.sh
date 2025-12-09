@@ -3,13 +3,13 @@
 
 set -e
 # Remove previous install
-rm -f ghidra_11.4.2_PUBLIC_20250826.zip
+rm -f ghidra_12.0_PUBLIC_*.zip
 rm -rf /usr/bin/ghidra
 
 # Download latest version of Ghidra (last updated October 2025)
-wget https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_11.4.2_build/ghidra_11.4.2_PUBLIC_20250826.zip
+wget https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.0_build/ghidra_12.0_PUBLIC_20251205.zip
 # Extract zip files and move it into /home/azul/.local/bin
-unzip -o ghidra_11.4.2_PUBLIC_20250826.zip
-rm -f ghidra_11.4.2_PUBLIC_20250826.zip
-mv ghidra_11.4.2_PUBLIC /usr/bin/ghidra
+unzip -o ghidra_12.0_PUBLIC_*.zip
+rm -f ghidra_12.0_PUBLIC_*.zip
+mv ghidra_12.0_PUBLIC /usr/bin/ghidra
 echo "ghidra installed"
