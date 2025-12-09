@@ -4,7 +4,7 @@ Extracting Features From A Binary Using Ghidra Headless.
 
 # Maintenance
 
-As of the 5th of November 2025, Ghidra 11.4.2 is the most recent version. Ghidra's most recent release files can be accessed
+As of the 5th of November 2025, Ghidra 12.0 is the most recent version. Ghidra's most recent release files can be accessed
 here: https://github.com/NationalSecurityAgency/ghidra/releases 
 
 To bump version numbers, only install-ghidra.sh needs to be updated.

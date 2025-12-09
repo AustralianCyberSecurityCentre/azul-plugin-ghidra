@@ -47,7 +47,7 @@ class BadGhidraInstallPath(Exception):
 class AzulPluginGhidra(BinaryPlugin):
     """Extracting Features From A Binary Using Ghidra Headless."""
 
-    VERSION = "2025.11.04"
+    VERSION = "2025.12.09"
     SETTINGS = add_settings(
         # Only select text and exectuable files
         filter_data_types={"content": ["executable/windows/"]},
