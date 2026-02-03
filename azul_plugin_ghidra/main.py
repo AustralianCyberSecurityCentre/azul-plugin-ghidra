@@ -55,7 +55,7 @@ class AzulPluginGhidra(BinaryPlugin):
         max_values_per_feature="3000",  # Generally enough, however there are some binaries that exceed this
         min_length_structure=(int, 100),  # Increasing this value will remove smaller functions from output
         # ghidra config that needs to be removed between runs to prevent build up  of logs
-        ghidra_config_path=(str, f"{os.path.expanduser("~")}/.config/ghidra"),
+        ghidra_config_path=(str, f"{os.path.expanduser('~')}/.config/ghidra"),
     )
     FEATURES = [
         Feature(
@@ -153,7 +153,6 @@ class AzulPluginGhidra(BinaryPlugin):
 
             return function_processed > 0  # True if at least 1 function was written, otherwise False
         except Exception:
-
             return False
         finally:
             if decomp_interface:
