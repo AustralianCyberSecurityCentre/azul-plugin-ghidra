@@ -26,7 +26,7 @@ When doing an editable install of a core package so it can be modified it is rec
 
 ## Usage
 
-A default entrypoint has been defined in `setup.py`, which will run `main()` in `azul_plugin_ghidra/main.py`
+A default entrypoint has been defined in `pyproject.toml`, which will run `main()` in `azul_plugin_ghidra/main.py`
 
 ```bash
 $ azul-plugin-ghidra
@@ -35,7 +35,7 @@ Pavlov probably thought about feeding his dogs every time someone rang a bell.
 
 ## Python Package management
 
-This python package is managed using a `setup.py` and `pyproject.toml` file.
+This python package is managed using a `pyproject.toml` file.
 
 Standardisation of installing and testing the python package is handled through tox.
 Tox commands include:
