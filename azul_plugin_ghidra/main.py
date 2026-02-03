@@ -83,7 +83,7 @@ class AzulPluginGhidra(BinaryPlugin):
         if len(function_structure) >= self.cfg.min_length_structure:
             outfile.write("//Function: " + str(function))
             outfile.write(output)
-            md5_hash = hashlib.md5((function_structure).encode("utf-8")).hexdigest()  # nosec B324
+            md5_hash = hashlib.md5((function_structure).encode("utf-8")).hexdigest()  # noqa: S324
 
             # Separating recognised and placeholder functions
             name = function.getName()
