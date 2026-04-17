@@ -153,14 +153,14 @@ class TestExecute(test_template.TestPlugin):
             JobResult(
                 state=State(
                     State.Label.COMPLETED_WITH_ERRORS,
-                    message="Partial completion occurred with the following errors: too many values for feature ghidra_func_structure_hash (3228) capping returned values to values at 3000\ntoo many values for feature ghidra_placeholder_func_name (3190) capping returned values to values at 3000",
+                    message="Partial completion occurred with the following errors: too many values for feature ghidra_func_structure_hash (3230) capping returned values to values at 3000\ntoo many values for feature ghidra_placeholder_func_name (3192) capping returned values to values at 3000",
                 ),
                 events=[
                     Event(
                         sha256="b9703a081d010c8315426ab13a4cc12025383cd49357f7518dd0bd58a3ecae41",
                         data=[
                             EventData(
-                                hash="759bd1149c92efc0d2fe03610859a3fefe3be901f29d2190c3e4cce01be7c57d",
+                                hash="cad514336ed27a02ecd215babd783543a9df8ab7c2b8415e3b586df4e6d68cab",
                                 label="decompiled_c",
                             )
                         ],
@@ -2837,6 +2837,7 @@ class TestExecute(test_template.TestPlugin):
                                 FV("d03f61e18f77092b7e7ef645720e130a", label="Function: FUN_1800993d0"),
                                 FV("d044717eacd06522a147bc7c40e52939", label="Function: FUN_1800c3838"),
                                 FV("d045251911eaf1f0c1a4006204a66126", label="Function: FUN_180160bbc"),
+                                FV("d0803cc16c1b6bc1bca04aae2152f7aa", label="Function: FUN_180165e28"),
                                 FV("d0966c0bb10d13900745229cb2f453cc", label="Function: FUN_180031b0c"),
                                 FV("d09dbef0e601c69b29451808b48da6d7", label="Function: FUN_18003ffe8"),
                                 FV("d0a5a3662c2bf079b29ee3ec149aa263", label="Function: FUN_1800194b8"),
@@ -3165,7 +3166,6 @@ class TestExecute(test_template.TestPlugin):
                                 FV("ec853527c1ee95dd04d13061407aa2bf", label="Function: FUN_1800bd170"),
                                 FV("ecacf2b084c78ae31d2dd4b8a70eccba", label="Function: FUN_18004eedc"),
                                 FV("ecbd690f835f7fcc86523c18bb7558ee", label="Function: FUN_1800bf390"),
-                                FV("ece01f390bcd49cd8d91fa61f026e196", label="Function: FUN_18004df5c"),
                             ],
                             "ghidra_placeholder_func_name": [
                                 FV("FUN_180001000", label="Structure Hash: 4b9c270f2c2a76cc28c2cc1b9e70d5fb"),
@@ -4558,6 +4558,7 @@ class TestExecute(test_template.TestPlugin):
                                 FV("FUN_1800a1734", label="Structure Hash: 6af4c8f817b773ce0550837f3d502f33"),
                                 FV("FUN_1800a1aec", label="Structure Hash: ce6fcc105974cabe2ca6aa750023e6a6"),
                                 FV("FUN_1800a1ec0", label="Structure Hash: befcaeb1725dc3ac043b0801b3256ef3"),
+                                FV("FUN_1800a208c", label="Structure Hash: ef20368f0a14d32e1756b6f28cafb626"),
                                 FV("FUN_1800a2ae0", label="Structure Hash: 4aeb6c6f2f2814bd4fdac279fbe8bf5b"),
                                 FV("FUN_1800a2f1c", label="Structure Hash: e03fcb294390c3aaaf335addc93d8bb6"),
                                 FV("FUN_1800a3214", label="Structure Hash: ae09f18332510cc0bfaf75b8f48bc76f"),
@@ -6167,7 +6168,6 @@ class TestExecute(test_template.TestPlugin):
                                 FV("FUN_18015165c", label="Structure Hash: 22de2aae550ae0dcf98e79ac03cfc2d6"),
                                 FV("FUN_180151874", label="Structure Hash: e16f81a51184358f6ca07b06ee109469"),
                                 FV("FUN_180151960", label="Structure Hash: 9686d0462953dc56b44aa2782be6debc"),
-                                FV("FUN_180151a84", label="Structure Hash: 8f34a063ac2ac2218e11da26f0a1c013"),
                             ],
                             "ghidra_recognised_func_name": [
                                 FV("DFU_Close", label="Structure Hash: c37981f31df9ba9e03d0ff2c24ba2a59"),
@@ -6215,6 +6215,6 @@ class TestExecute(test_template.TestPlugin):
                         },
                     )
                 ],
-                data={"759bd1149c92efc0d2fe03610859a3fefe3be901f29d2190c3e4cce01be7c57d": b""},
+                data={"cad514336ed27a02ecd215babd783543a9df8ab7c2b8415e3b586df4e6d68cab": b""},
             ),
         )
