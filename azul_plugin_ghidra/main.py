@@ -80,7 +80,7 @@ class AzulPluginGhidra(BinaryPlugin):
     def process_function(self, function, output, outfile):
         """Processing functions ghidra decompiles."""
         function_structure = "".join(re.findall(r"[{}\[\]()\+\=\*\-\/\!\%\;]", str(output)))
-        if len(function_structure) >= self.cfg.min_length_structure:
+        if len(function_structure) >= self.cfg.min_length_structure:  # ty: ignore[unresolved-attribute] ty doesn't understand add_settings
             outfile.write("//Function: " + str(function))
             outfile.write(output)
             md5_hash = hashlib.md5((function_structure).encode("utf-8")).hexdigest()  # noqa: S324
@@ -113,8 +113,8 @@ class AzulPluginGhidra(BinaryPlugin):
 
         # Initialising ghidra in headless mode
         pyghidra.start(verbose=True)
-        from ghidra.app.decompiler import DecompInterface
-        from ghidra.util.task import ConsoleTaskMonitor
+        from ghidra.app.decompiler import DecompInterface  # ty: ignore[unresolved-import] false positive
+        from ghidra.util.task import ConsoleTaskMonitor  # ty: ignore[unresolved-import]
 
         decomp_interface = None
         try:
@@ -160,7 +160,7 @@ class AzulPluginGhidra(BinaryPlugin):
 
     def cleanup_tempfiles(self):
         """Cleanup temporary files left behind by ghidra."""
-        shutil.rmtree(self.cfg.ghidra_config_path, ignore_errors=True)
+        shutil.rmtree(self.cfg.ghidra_config_path, ignore_errors=True)  # ty: ignore[unresolved-attribute] ty doesn't understand add_settings
         try:
             temp_dir = pathlib.Path(tempfile.gettempdir())
             for file in temp_dir.iterdir():

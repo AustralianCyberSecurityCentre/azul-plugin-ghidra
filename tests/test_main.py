@@ -1,6 +1,7 @@
 """Test cases for plugin output."""
 
 from azul_runner import (
+    DataLabel,
     FV,
     Event,
     EventData,
@@ -58,7 +59,7 @@ class TestExecute(test_template.TestPlugin):
                         data=[
                             EventData(
                                 hash="3febd18860ecba941dff09684cadb9a202b3ab6b463c212373e89f5cdea94092",
-                                label="decompiled_c",
+                                label=DataLabel.DECOMPILED_C,
                             )
                         ],
                         features={
@@ -161,7 +162,7 @@ class TestExecute(test_template.TestPlugin):
                         data=[
                             EventData(
                                 hash="cad514336ed27a02ecd215babd783543a9df8ab7c2b8415e3b586df4e6d68cab",
-                                label="decompiled_c",
+                                label=DataLabel.DECOMPILED_C,
                             )
                         ],
                         features={
