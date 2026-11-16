@@ -113,8 +113,8 @@ class AzulPluginGhidra(BinaryPlugin):
 
         # Initialising ghidra in headless mode
         pyghidra.start(verbose=True)
-        from ghidra.app.decompiler import DecompInterface  # ty: ignore[unresolved-import] false positive
-        from ghidra.util.task import ConsoleTaskMonitor  # ty: ignore[unresolved-import]
+        from ghidra.app.decompiler import DecompInterface  # ty: ignore[import-not-found] false positive
+        from ghidra.util.task import ConsoleTaskMonitor  # ty: ignore[import-not-found]
 
         decomp_interface = None
         try:
